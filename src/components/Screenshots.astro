@@ -2,23 +2,21 @@
 const shots = [
   {
     title: "Allocation-Treemap",
+    src: "/screenshots/allocation-treemap.png",
     caption:
       "Sektor-, Regions- und Positionsgewichte auf einen Blick. Klick auf eine Kachel öffnet die Detailanalyse.",
   },
   {
     title: "TWRR Performance",
+    src: "/screenshots/twrr-performance.png",
     caption:
       "Zeitgewichtete Rendite gegen Smart Benchmark — über mehrere Perioden parallel.",
   },
   {
     title: "Risiko-Panel",
+    src: "/screenshots/risiko-panel.png",
     caption:
       "Volatilität, Sharpe, Max Drawdown und Beta. Pro Position und auf Portfolio-Ebene.",
-  },
-  {
-    title: "Headline Insights",
-    caption:
-      "Was hat dein Depot diese Woche bewegt? Drei Sätze, automatisch generiert, mit Drilldown.",
   },
 ];
 ---
@@ -28,20 +26,31 @@ const shots = [
     <span class="eyebrow">Screenshots</span>
     <h2>So sieht's aus.</h2>
     <p class="lead" style="margin-top: 1rem;">
-      Echte Screenshots folgen mit der Open Beta. Hier siehst du den Aufbau,
-      damit du weißt, woran du bist.
+      Drei Ansichten aus der laufenden Private Beta. Allokation, Performance
+      und Risiko — die Trias, an der du dein Depot wirklich misst.
     </p>
 
-    <div class="grid grid--shots" style="margin-top: 3rem;">
-      {shots.map((s) => (
-        <figure class="shot">
-          <div class="shot__frame" aria-hidden="true">
-            <div class="shot__chrome">
+    <div class="grid shots-grid" style="margin-top: 3rem;">
+      {shots.map((s, i) => (
+        <figure class={`shot${i === 0 ? " shot--feature" : ""}`}>
+          <div class="shot__frame">
+            <div class="shot__chrome" aria-hidden="true">
               <span></span><span></span><span></span>
             </div>
-            <div class="shot__placeholder">
-              <span class="shot__title-tag">{s.title}</span>
-              <span class="shot__hint">Screenshot folgt</span>
+            <div class="shot__body">
+              <div class="shot__placeholder" aria-hidden="true">
+                <span class="shot__title-tag">{s.title}</span>
+                <span class="shot__hint">Screenshot folgt</span>
+              </div>
+              <img
+                class="shot__img"
+                src={s.src}
+                alt={s.title}
+                loading="lazy"
+                decoding="async"
+                onload="this.previousElementSibling.style.display='none'"
+                onerror="this.remove()"
+              />
             </div>
           </div>
           <figcaption class="shot__cap">
@@ -55,6 +64,20 @@ const shots = [
 </section>
 
 <style>
+  .shots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shot--feature {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 720px) {
+    .shots-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .shot {
     margin: 0;
     display: flex;
@@ -87,8 +110,15 @@ const shots = [
     background: var(--border-strong);
   }
 
-  .shot__placeholder {
+  .shot__body {
     flex: 1;
+    position: relative;
+    background: var(--surface);
+  }
+
+  .shot__placeholder {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,6 +128,16 @@ const shots = [
       linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+
+  .shot__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
   }
 
   .shot__title-tag {

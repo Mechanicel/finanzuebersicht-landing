@@ -1,5 +1,30 @@
 ---
 import WaitlistForm from "./WaitlistForm.astro";
+
+// Build-time fetch of the current Buttondown subscriber count.
+// BUTTONDOWN_API_KEY must be set as a (non-public) env var on the host.
+let waitlistCount: number | null = null;
+const apiKey = import.meta.env.BUTTONDOWN_API_KEY;
+
+if (apiKey) {
+  try {
+    const res = await fetch(
+      "https://api.buttondown.email/v1/subscribers?type=regular",
+      { headers: { Authorization: `Token ${apiKey}` } },
+    );
+    if (res.ok) {
+      const data = await res.json();
+      if (typeof data?.count === "number") waitlistCount = data.count;
+    }
+  } catch {
+    // fall back to the static label below
+  }
+}
+
+const countLabel =
+  waitlistCount !== null && waitlistCount > 0
+    ? `Bereits ${waitlistCount.toLocaleString("de-DE")} Anleger auf der Warteliste.`
+    : "Erste Anleger sind bereits angemeldet.";
 ---
 
 <section class="section cta" id="warteliste">
@@ -18,7 +43,7 @@ import WaitlistForm from "./WaitlistForm.astro";
 
       <p class="cta__proof text-mute">
         <span class="cta__dot"></span>
-        <span data-cta-count>Erste Anleger sind bereits angemeldet.</span>
+        <span>{countLabel}</span>
       </p>
     </div>
   </div>
