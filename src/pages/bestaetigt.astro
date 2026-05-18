@@ -1,0 +1,137 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base title="Bestätigt — Finanzübersicht" noindex={true}>
+  <main class="container confirm">
+    <div class="confirm__inner">
+      <div class="confirm__icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="72" height="72">
+          <circle
+            cx="32"
+            cy="32"
+            r="30"
+            fill="rgba(52, 211, 153, 0.08)"
+            stroke="#34D399"
+            stroke-width="2"
+          />
+          <path
+            d="M20 33 L29 42 L45 24"
+            fill="none"
+            stroke="#34D399"
+            stroke-width="3.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <h1>Du bist auf der Warteliste.</h1>
+
+      <p class="lead confirm__sub">
+        Wir melden uns, sobald die Open Beta startet. Bis dahin: kein Spam,
+        versprochen.
+      </p>
+
+      <ul class="confirm__next" role="list">
+        <li>
+          <span class="confirm__dot" aria-hidden="true"></span>
+          Du bekommst eine Mail zum Beta-Start — vorher nichts.
+        </li>
+        <li>
+          <span class="confirm__dot" aria-hidden="true"></span>
+          Du kannst das Repo schon jetzt auf GitHub verfolgen.
+        </li>
+      </ul>
+
+      <div class="confirm__actions">
+        <a href="/" class="btn btn--primary">Zurück zur Startseite</a>
+        <a
+          href="https://github.com/Mechanicel/Finanzuebersicht"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--ghost"
+        >
+          GitHub Repo
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .confirm {
+    min-height: calc(100vh - 220px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.25rem;
+  }
+
+  .confirm__inner {
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .confirm__icon {
+    margin-bottom: 0.25rem;
+    filter: drop-shadow(0 0 24px var(--accent-glow));
+  }
+
+  .confirm__sub {
+    margin-bottom: 0.5rem;
+  }
+
+  .confirm__next {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+  }
+
+  .confirm__next li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .confirm__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    flex-shrink: 0;
+  }
+
+  .confirm__actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  @media (max-width: 540px) {
+    .confirm__actions .btn {
+      flex: 1 1 100%;
+    }
+  }
+</style>

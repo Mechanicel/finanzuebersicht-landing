@@ -4,11 +4,13 @@ import "../styles/global.css";
 export interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "Finanzübersicht — Dein Portfolio. Ehrlich analysiert.",
   description = "Das einzige deutschsprachige Portfolio-Dashboard, das dir sagt, ob deine Aktien die Bücher frisieren. Smart Benchmark, Risiko-Dashboard und Bilanz-Forensik für analytische Anleger.",
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -22,6 +24,7 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0B0D12" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
