@@ -1,0 +1,127 @@
+---
+const shots = [
+  {
+    title: "Allocation-Treemap",
+    caption:
+      "Sektor-, Regions- und Positionsgewichte auf einen Blick. Klick auf eine Kachel öffnet die Detailanalyse.",
+  },
+  {
+    title: "TWRR Performance",
+    caption:
+      "Zeitgewichtete Rendite gegen Smart Benchmark — über mehrere Perioden parallel.",
+  },
+  {
+    title: "Risiko-Panel",
+    caption:
+      "Volatilität, Sharpe, Max Drawdown und Beta. Pro Position und auf Portfolio-Ebene.",
+  },
+  {
+    title: "Headline Insights",
+    caption:
+      "Was hat dein Depot diese Woche bewegt? Drei Sätze, automatisch generiert, mit Drilldown.",
+  },
+];
+---
+
+<section class="section" id="screenshots">
+  <div class="container">
+    <span class="eyebrow">Screenshots</span>
+    <h2>So sieht's aus.</h2>
+    <p class="lead" style="margin-top: 1rem;">
+      Echte Screenshots folgen mit der Open Beta. Hier siehst du den Aufbau,
+      damit du weißt, woran du bist.
+    </p>
+
+    <div class="grid grid--shots" style="margin-top: 3rem;">
+      {shots.map((s) => (
+        <figure class="shot">
+          <div class="shot__frame" aria-hidden="true">
+            <div class="shot__chrome">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="shot__placeholder">
+              <span class="shot__title-tag">{s.title}</span>
+              <span class="shot__hint">Screenshot folgt</span>
+            </div>
+          </div>
+          <figcaption class="shot__cap">
+            <h3>{s.title}</h3>
+            <p class="text-dim">{s.caption}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .shot {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .shot__frame {
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--surface-2), var(--bg-elev));
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shot__chrome {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .shot__chrome span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--border-strong);
+  }
+
+  .shot__placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .shot__title-tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  .shot__hint {
+    font-size: 0.8rem;
+    color: var(--text-mute);
+  }
+
+  .shot__cap h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .shot__cap p {
+    font-size: 0.92rem;
+  }
+</style>

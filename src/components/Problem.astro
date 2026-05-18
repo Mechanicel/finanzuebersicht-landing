@@ -1,0 +1,85 @@
+---
+const pains = [
+  {
+    title: "Dein Benchmark passt nicht zu deinem Depot",
+    body: "Der MSCI World ist nicht dein Benchmark, wenn 40 % deines Depots in US-Tech und 15 % in Schwellenländern stecken. Smart Benchmark schlägt dir automatisch eine Mischung vor, die zu deiner echten Allokation passt — oder du baust dir ein Composite selbst.",
+  },
+  {
+    title: "Du weißt nicht, welche Picks dich tragen — und welche bremsen",
+    body: "Ein Plus von 14 % im Depot heißt wenig, wenn zwei Positionen 80 % davon liefern. Performance-Attribution zerlegt deinen Return nach Position, Sektor und Region — und zeigt, wo dein Klumpenrisiko sitzt.",
+  },
+  {
+    title: "Niemand sagt dir, ob die Bilanzen halten",
+    body: "Earnings Quality, Cashflow-Divergenz, Beneish M-Score: die Signale, die in den 12 Monaten vor einem Bilanzskandal blinken. Die Forensik-Engine bringt diese Kennzahlen aus dem Equity-Research in dein privates Depot.",
+  },
+];
+---
+
+<section class="section" id="problem">
+  <div class="container">
+    <span class="eyebrow">Das Problem</span>
+    <h2>
+      Du weißt, was du im Depot hast.<br />
+      <span class="text-dim">Aber weißt du auch, ob die Bilanzen halten?</span>
+    </h2>
+    <p class="lead" style="margin-top: 1rem;">
+      Die gängigen Portfolio-Tools im DACH-Raum zeigen dir, was passiert ist.
+      Sie sagen dir nicht, warum — und schon gar nicht, ob du das nächste
+      Wirecard im Depot hast.
+    </p>
+
+    <ol class="pains" role="list">
+      {pains.map((p, i) => (
+        <li class="pain">
+          <div class="pain__num">{String(i + 1).padStart(2, "0")}</div>
+          <div class="pain__body">
+            <h3>{p.title}</h3>
+            <p class="text-dim">{p.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .pains {
+    list-style: none;
+    padding: 0;
+    margin: 3rem 0 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .pain {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    background: linear-gradient(180deg, var(--surface), var(--bg-elev));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.6rem;
+  }
+
+  @media (min-width: 720px) {
+    .pain {
+      grid-template-columns: 80px 1fr;
+      padding: 1.75rem 2rem;
+    }
+  }
+
+  .pain__num {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    padding-top: 0.2rem;
+  }
+
+  .pain__body h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+</style>

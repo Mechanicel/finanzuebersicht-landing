@@ -1,0 +1,78 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base title="Datenschutz — Finanzübersicht">
+  <main class="container legal">
+    <a href="/" class="legal__back">← Zur Startseite</a>
+    <h1>Datenschutzerklärung</h1>
+    <p class="text-dim">
+      Platzhalter — vor dem öffentlichen Launch durch eine geprüfte
+      Datenschutzerklärung ersetzen (z. B. via Generator + anwaltliche Prüfung).
+    </p>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      [Vor- und Nachname], [Adresse], <a href="mailto:hallo@example.com">hallo@example.com</a>.
+    </p>
+
+    <h2>2. Hosting</h2>
+    <p>
+      Diese Seite wird statisch ausgeliefert. Der Hosting-Anbieter
+      verarbeitet beim Aufruf der Seite technisch notwendige Daten
+      (IP-Adresse, User-Agent, Zeitstempel) im berechtigten Interesse
+      gemäß Art. 6 Abs. 1 lit. f DSGVO.
+    </p>
+
+    <h2>3. Newsletter / Warteliste</h2>
+    <p>
+      Wenn du dich auf die Warteliste einträgst, verarbeiten wir deine
+      E-Mail-Adresse zum Versand von Updates zum Produkt
+      (Art. 6 Abs. 1 lit. a DSGVO). Die Anmeldung erfolgt im Double-Opt-In
+      über den Anbieter Buttondown. Du kannst dich jederzeit über den
+      Abmelde-Link in jeder E-Mail wieder austragen.
+    </p>
+
+    <h2>4. Cookies & Tracking</h2>
+    <p>
+      Diese Seite setzt keine Tracking-Cookies und nutzt kein Analytics.
+    </p>
+
+    <h2>5. Deine Rechte</h2>
+    <p>
+      Du hast jederzeit das Recht auf Auskunft, Berichtigung, Löschung,
+      Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch.
+      Schreib uns dafür eine E-Mail an die oben genannte Adresse.
+    </p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    max-width: 720px;
+  }
+
+  .legal h1 {
+    font-size: 2.2rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .legal h2 {
+    font-size: 1.2rem;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .legal p {
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__back {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+</style>

@@ -1,0 +1,226 @@
+---
+const features = [
+  {
+    title: "Smart Benchmark",
+    status: "live",
+    body: "Auto-Suggest passend zu deiner echten Allokation oder Custom Composite aus mehreren Indizes. Keine 'MSCI World vs. alles'-Vergleiche mehr.",
+    bullets: [
+      "Allokations-basierter Vorschlag",
+      "Composite-Editor (z. B. 60 % MSCI World, 30 % EM, 10 % Bund)",
+      "Outperformance pro Periode statt nur YTD",
+    ],
+    icon: "benchmark",
+  },
+  {
+    title: "Risiko-Dashboard",
+    status: "live",
+    body: "Volatilität, Sharpe, Sortino, Max Drawdown und Beta — pro Position und auf Portfolio-Ebene. Aus der gleichen Datenbasis wie deine Performance.",
+    bullets: [
+      "Rolling Volatilität & Drawdown-Kurve",
+      "Beta gegen deinen Smart Benchmark",
+      "Korrelationsmatrix der Top-Positionen",
+    ],
+    icon: "risk",
+  },
+  {
+    title: "Attribution-Analyse",
+    status: "live",
+    body: "Welche Picks ziehen, welche bremsen? Performance-Beitrag pro Position, Sektor und Region — als Tabelle und als Treemap.",
+    bullets: [
+      "Beitragsrechnung in % und in EUR",
+      "Sektor- & Regions-Aggregation",
+      "Drilldown bis auf einzelne Trades",
+    ],
+    icon: "attribution",
+  },
+  {
+    title: "Forensik-Engine",
+    status: "soon",
+    body: "Beneish M-Score, Earnings Quality, Cashflow-Divergenz: die Signale, die institutionelle Researcher für Bilanz-Red-Flags nutzen — übersetzt für dein Privatdepot.",
+    bullets: [
+      "Beneish M-Score pro Holding",
+      "Operating Cashflow vs. Net Income",
+      "Working-Capital-Anomalien & Accrual Ratio",
+    ],
+    icon: "forensic",
+  },
+];
+---
+
+<section class="section" id="features">
+  <div class="container">
+    <span class="eyebrow">Features</span>
+    <h2>Vier Werkzeuge, die kein anderes DACH-Tool zusammen liefert.</h2>
+    <p class="lead" style="margin-top: 1rem;">
+      Drei davon sind live. Eins kommt — und genau das ist der Grund,
+      Finanzübersicht zu nutzen, bevor es alle haben.
+    </p>
+
+    <div class="grid grid--features" style="margin-top: 3rem;">
+      {features.map((f) => (
+        <article class="card feature">
+          <header class="feature__head">
+            <div class={`feature__icon feature__icon--${f.icon}`} aria-hidden="true"></div>
+            <span class={f.status === "soon" ? "badge badge--soon" : "badge"}>
+              {f.status === "soon" ? "Coming Soon" : "Live"}
+            </span>
+          </header>
+          <h3 class="feature__title">{f.title}</h3>
+          <p class="text-dim feature__body">{f.body}</p>
+          <ul class="feature__bullets">
+            {f.bullets.map((b) => (
+              <li>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="M3 8.5l3 3 7-7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .feature__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .feature__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    position: relative;
+  }
+
+  .feature__icon::before,
+  .feature__icon::after {
+    content: "";
+    position: absolute;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .feature__icon--benchmark::before {
+    left: 9px;
+    top: 22px;
+    width: 5px;
+    height: 10px;
+  }
+
+  .feature__icon--benchmark::after {
+    left: 17px;
+    top: 14px;
+    width: 5px;
+    height: 18px;
+    box-shadow: 8px 4px 0 var(--accent);
+  }
+
+  .feature__icon--risk::before {
+    left: 9px;
+    top: 22px;
+    width: 22px;
+    height: 2px;
+    transform: rotate(-25deg);
+    transform-origin: left center;
+  }
+
+  .feature__icon--risk::after {
+    left: 9px;
+    top: 22px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow:
+      8px -3px 0 var(--accent),
+      16px -7px 0 var(--accent);
+  }
+
+  .feature__icon--attribution::before {
+    left: 9px;
+    top: 9px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .feature__icon--attribution::after {
+    left: 21px;
+    top: 9px;
+    width: 10px;
+    height: 22px;
+    box-shadow: -12px 12px 0 var(--accent);
+  }
+
+  .feature__icon--forensic::before {
+    left: 11px;
+    top: 11px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--accent);
+  }
+
+  .feature__icon--forensic::after {
+    left: 22px;
+    top: 22px;
+    width: 8px;
+    height: 2px;
+    transform: rotate(45deg);
+    transform-origin: left center;
+  }
+
+  .feature__title {
+    font-size: 1.2rem;
+  }
+
+  .feature__body {
+    font-size: 0.95rem;
+  }
+
+  .feature__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .feature__bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .feature__bullets svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--accent);
+    margin-top: 0.2rem;
+  }
+</style>

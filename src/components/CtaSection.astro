@@ -1,0 +1,70 @@
+---
+import WaitlistForm from "./WaitlistForm.astro";
+---
+
+<section class="section cta" id="warteliste">
+  <div class="container cta__wrap">
+    <div class="cta__inner">
+      <span class="eyebrow">Warteliste</span>
+      <h2>
+        Sei dabei, bevor der erste Skandal in deinem Depot landet.
+      </h2>
+      <p class="lead cta__sub">
+        Kostenloser Basis-Zugang für Early Adopter. Du bekommst eine Mail,
+        sobald die Open Beta startet — vorher nichts.
+      </p>
+
+      <WaitlistForm variant="cta" buttonLabel="Zugang sichern" />
+
+      <p class="cta__proof text-mute">
+        <span class="cta__dot"></span>
+        <span data-cta-count>Erste Anleger sind bereits angemeldet.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background:
+      radial-gradient(
+        700px 360px at 50% 0%,
+        rgba(52, 211, 153, 0.08),
+        transparent 70%
+      );
+  }
+
+  .cta__wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cta__inner {
+    max-width: 680px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .cta__sub {
+    text-align: center;
+  }
+
+  .cta__proof {
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.85rem;
+  }
+
+  .cta__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+</style>
