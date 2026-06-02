@@ -21,6 +21,12 @@ const rows = [
     us: true,
   },
   {
+    feature: "Dividenden-Prognose (aus echten Holdings)",
+    parqet: { label: "Ist-Kalender", cls: "alt" },
+    pp: { label: "Ist-Buchungen", cls: "alt" },
+    us: { label: "Prognose", cls: "yes" },
+  },
+  {
     feature: "Bilanz-Forensik (M-Score, Earnings Quality)",
     parqet: false,
     pp: false,
@@ -34,11 +40,14 @@ const rows = [
   },
 ];
 
-function cell(v: boolean | string) {
+type Cell = boolean | "partial" | "soon" | { label: string; cls: string };
+
+function cell(v: Cell) {
   if (v === true) return { label: "Ja", cls: "yes" };
+  if (v === false) return { label: "Nein", cls: "no" };
   if (v === "partial") return { label: "Teilweise", cls: "partial" };
   if (v === "soon") return { label: "Bald", cls: "soon" };
-  return { label: "Nein", cls: "no" };
+  return v;
 }
 ---
 
@@ -152,6 +161,12 @@ function cell(v: boolean | string) {
     background: rgba(155, 165, 178, 0.06);
     color: var(--text-mute);
     border-color: var(--border);
+  }
+
+  .pill--alt {
+    background: rgba(155, 165, 178, 0.1);
+    color: var(--text-dim);
+    border-color: var(--border-strong);
   }
 
   .pill--partial {
