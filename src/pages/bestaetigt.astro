@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base title="Eingetragen – Finanzübersicht" noindex={true}>
+  <main class="container confirm">
+    <div class="confirm__inner">
+      <h1>Du stehst auf der Liste.</h1>
+
+      <p class="lead">
+        Danke. Sobald ein Platz in der Beta frei ist, bekommst du eine Mail mit
+        dem Link zur Registrierung und dem Einladungscode. Bis dahin passiert
+        nichts weiter.
+      </p>
+
+      <p class="confirm__sig">Tom</p>
+
+      <div class="confirm__actions">
+        <a href="/" class="btn btn--primary">Zurück zur Startseite</a>
+        <a href="/#beipackzettel" class="btn btn--ghost">Beipackzettel lesen</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .confirm {
+    min-height: calc(100vh - 220px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1.25rem;
+  }
+
+  .confirm__inner {
+    max-width: 620px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+
+  .confirm h1 {
+    font-size: clamp(2.4rem, 5vw + 0.5rem, 4rem);
+  }
+
+  .confirm__sig {
+    color: var(--ink-dim);
+  }
+
+  .confirm__actions {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+</style>

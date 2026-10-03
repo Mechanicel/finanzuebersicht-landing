@@ -1,0 +1,130 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+import Mail from "../components/Mail.astro";
+---
+
+<Base title="Datenschutz – Finanzübersicht">
+  <main class="container legal">
+    <a href="/" class="legal__back">← Zur Startseite</a>
+    <h1>Datenschutzerklärung</h1>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      Tom Pinter, Anschrift siehe <a href="/impressum/">Impressum</a>,
+      E-Mail: <Mail />.
+    </p>
+
+    <h2>2. Hosting dieser Seite</h2>
+    <p>
+      Diese Seite wird von Vercel Inc., 440 N Barranca Ave #4133, Covina, CA
+      91723, USA, ausgeliefert. Beim Aufruf verarbeitet Vercel technisch
+      notwendige Daten wie IP-Adresse, Browserkennung und Zeitpunkt in
+      Server-Logs. Grundlage ist mein berechtigtes Interesse an einer sicheren
+      und stabilen Auslieferung der Seite (Art. 6 Abs. 1 lit. f DSGVO).
+    </p>
+    <p>
+      Dabei werden Daten in die USA übermittelt. Vercel ist nach eigenen
+      Angaben unter dem EU-U.S. Data Privacy Framework zertifiziert
+      (Angemessenheitsbeschluss, Art. 45 DSGVO) und stützt Übermittlungen
+      zusätzlich auf die Standardvertragsklauseln der EU-Kommission
+      (Art. 46 Abs. 2 lit. c DSGVO). Analyse-Funktionen von Vercel wie Web
+      Analytics oder Speed Insights sind für diese Seite nicht eingebunden.
+    </p>
+
+    <h2>3. Warteliste über Buttondown</h2>
+    <p>
+      Wenn du dich auf die Warteliste einträgst, verarbeite ich deine
+      E-Mail-Adresse, um dich über freie Plätze in der Beta und gelegentlich
+      über das Projekt zu informieren (Einwilligung, Art. 6 Abs. 1 lit. a
+      DSGVO). Die Anmeldung läuft im Double-Opt-In-Verfahren über den
+      Newsletter-Dienst Buttondown (Buttondown, LLC, 406 W Franklin St. #201,
+      Richmond, VA 23221, USA).
+    </p>
+    <p>
+      Dabei werden Daten in die USA übermittelt. Grundlage sind die
+      Standardvertragsklauseln der EU-Kommission (Durchführungsbeschluss
+      (EU) 2021/914, Art. 46 Abs. 2 lit. c DSGVO), die Buttondown in seinem
+      Auftragsverarbeitungsvertrag vorsieht. Das Erfassen von Öffnungen und
+      Klicks in Mails ist für diese Liste ausgeschaltet.
+    </p>
+    <p>
+      Deine Adresse bleibt gespeichert, bis du dich abmeldest. Das geht
+      jederzeit über den Link in jeder Mail oder per Nachricht an mich. Die
+      Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen.
+    </p>
+
+    <h2>4. Kontakt per E-Mail</h2>
+    <p>
+      Wenn du mir schreibst, verarbeite ich deine Adresse und den Inhalt der
+      Mail, um dir zu antworten (Art. 6 Abs. 1 lit. f DSGVO). Ich lösche die
+      Mails, wenn sie dafür nicht mehr gebraucht werden.
+    </p>
+
+    <h2>5. Cookies, Tracking, Schriften</h2>
+    <p>
+      Diese Seite setzt keine Cookies und nutzt kein Tracking und keine
+      Analytics. Schriften werden mit der Seite ausgeliefert, nicht von Google
+      Fonts oder einem anderen Drittanbieter.
+    </p>
+
+    <h2>6. Depotdaten in der App</h2>
+    <p>
+      Wer an der Beta teilnimmt, legt in der App ein Konto an und lädt
+      Depotdaten hoch (CSV-Export von Trade Republic oder Handeingabe). Diese
+      Daten verarbeite ich, um dir die Auswertungen anzuzeigen (Vertrag bzw.
+      Nutzungsverhältnis, Art. 6 Abs. 1 lit. b DSGVO).
+    </p>
+    <p>
+      Die App läuft auf einem Server, den ich selbst betreibe. Zugriff auf die
+      Daten habe außer dir nur ich als Betreiber. Es gibt keine Weitergabe an
+      Dritte, kein Tracking und keine Analytics von Drittanbietern;
+      Server-Logs bleiben auf meiner eigenen Infrastruktur. Für Kurse und
+      Unternehmensdaten fragt die App Yahoo Finance an. Dabei werden die
+      Kennungen der Wertpapiere übertragen.
+    </p>
+    <p>
+      Die Daten bleiben gespeichert, solange dein Konto besteht. Auf Wunsch
+      lösche ich dein Konto mitsamt allen Depotdaten, eine Nachricht an die
+      oben genannte Adresse genügt.
+    </p>
+
+    <h2>7. Deine Rechte</h2>
+    <p>
+      Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung
+      der Verarbeitung, Datenübertragbarkeit und Widerspruch. Schreib mir
+      dafür eine E-Mail. Außerdem kannst du dich bei einer
+      Datenschutz-Aufsichtsbehörde beschweren, etwa bei der Behörde deines
+      Wohnorts.
+    </p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    max-width: 720px;
+  }
+
+  .legal h1 {
+    font-size: 2.4rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .legal h2 {
+    font-size: 1.25rem;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .legal p {
+    color: var(--ink-2);
+    margin-bottom: 0.8rem;
+  }
+
+  .legal__back {
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+  }
+</style>

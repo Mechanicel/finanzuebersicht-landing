@@ -1,0 +1,211 @@
+---
+// Screenshot aus der App: Ausschnitt in Lesegröße, Klick öffnet das ganze Panel
+// in der Lightbox. Optional Rotstift-Markierungen (Koordinaten im Pixelraum des
+// Bildes) und eine handschriftliche Notiz.
+
+export interface Note {
+  text: string;
+  /** Position in Prozent der Bildbreite/-höhe; Werte außerhalb 0–100 liegen neben dem Bild */
+  x: number;
+  y: number;
+  rot?: number;
+  width?: string;
+}
+
+export interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Ganzes Panel für die Lightbox; ohne Angabe wird src vergrößert */
+  full?: string;
+  marks?: string[];
+  note?: Note;
+  caption?: string;
+  tilt?: number;
+  tape?: boolean;
+  eager?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  full,
+  marks = [],
+  note,
+  caption,
+  tilt = 0,
+  tape = false,
+  eager = false,
+  class: cls = "",
+} = Astro.props;
+---
+
+<figure class:list={["shot", cls]} style={`--tilt:${tilt}deg`}>
+  <div class="shot__frame">
+    {tape && <span class="tape tape--l" aria-hidden="true" />}
+    {tape && <span class="tape tape--r" aria-hidden="true" />}
+    <a href={full ?? src} class="shot__zoom" data-lightbox data-alt={alt}>
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+      />
+      <span class="shot__hint" aria-hidden="true">Vergrößern</span>
+    </a>
+    {
+      marks.length > 0 && (
+        <svg
+          class="pen"
+          viewBox={`0 0 ${width} ${height}`}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {marks.map((d) => (
+            <path d={d} pathLength="1" vector-effect="non-scaling-stroke" />
+          ))}
+        </svg>
+      )
+    }
+    {
+      note && (
+        <span
+          class="shot__note hand"
+          style={`left:${note.x}%;top:${note.y}%;--rot:${note.rot ?? -4}deg;${note.width ? `width:${note.width};` : ""}`}
+          aria-hidden="true"
+        >
+          {note.text}
+        </span>
+      )
+    }
+  </div>
+  {caption && <figcaption class="shot__cap">{caption}</figcaption>}
+</figure>
+
+<style>
+  .shot {
+    margin: 0;
+    position: relative;
+    transform: rotate(var(--tilt));
+  }
+
+  .shot__frame {
+    position: relative;
+    background: var(--app);
+    padding: 6px;
+    border-radius: 4px;
+    box-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.05),
+      0 18px 30px -18px rgba(40, 30, 10, 0.45),
+      0 40px 60px -40px rgba(40, 30, 10, 0.35);
+  }
+
+  .shot__zoom {
+    display: block;
+    position: relative;
+    cursor: zoom-in;
+  }
+
+  .shot__zoom img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+  }
+
+  .shot__hint {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #e2e8f0;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .shot__zoom:hover .shot__hint,
+  .shot__zoom:focus-visible .shot__hint {
+    opacity: 1;
+  }
+
+  .shot__frame .pen {
+    position: absolute;
+    inset: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .shot__frame .pen path {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.35));
+  }
+
+  .tape {
+    position: absolute;
+    top: -14px;
+    width: 92px;
+    height: 28px;
+    background: rgba(236, 222, 170, 0.78);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+    z-index: 2;
+    clip-path: polygon(3% 0, 97% 4%, 100% 92%, 1% 100%);
+    pointer-events: none;
+  }
+
+  .tape--l {
+    left: 22px;
+    transform: rotate(-6deg);
+  }
+
+  .tape--r {
+    right: 22px;
+    transform: rotate(5deg);
+  }
+
+  .shot__note {
+    position: absolute;
+    z-index: 3;
+    font-size: clamp(1.25rem, 1.1vw + 0.9rem, 1.75rem);
+    transform: rotate(var(--rot));
+    width: max-content;
+    max-width: 16rem;
+    pointer-events: none;
+    text-shadow: 0 0 6px var(--paper), 0 0 2px var(--paper);
+  }
+
+  .shot__cap {
+    margin-top: 0.8rem;
+    font-size: 0.86rem;
+    color: var(--ink-dim);
+    max-width: 62ch;
+  }
+
+  @media (max-width: 760px) {
+    .shot {
+      transform: none;
+    }
+
+    .shot__note {
+      position: static;
+      display: block;
+      margin: 6px -6px -6px;
+      padding-top: 0.7rem;
+      background: var(--paper);
+      transform: none;
+      max-width: none;
+      width: auto !important;
+    }
+  }
+</style>

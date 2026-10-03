@@ -1,0 +1,16 @@
+---
+// Kontaktadresse, leicht gegen Scraper verschleiert: Im HTML steht nur
+// „tom [at] pinterhome.de“, der mailto-Link wird erst im Browser zusammengesetzt.
+const user = "tom";
+const domain = "pinterhome.de";
+---
+
+<a class="mail" data-u={user} data-d={domain}>{user} [at] {domain}</a>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("a.mail[data-u]").forEach((a) => {
+    const addr = `${a.dataset.u}@${a.dataset.d}`;
+    a.href = `mailto:${addr}`;
+    a.textContent = addr;
+  });
+</script>

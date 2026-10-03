@@ -1,0 +1,226 @@
+---
+// Quelle: offenes Ticket-Board im Produkt-Repo, Stand 03.10.2026. Bewusst ohne Termine.
+const done = [
+  "Import der Trade-Republic-CSV mit Vorschau",
+  "Bewertung sauber getrennt nach Kurs- und Kaufwährung",
+  "Eigener Vergleichsindex, auch als Mischung",
+  "Zukunftssimulation",
+  "Dividendenprognose",
+  "Marktdaten werden nachts vorgeladen",
+];
+
+const planned = [
+  "Durchschau durch ETFs: Fonds in ihre Einzeltitel auflösen, damit Länder-, Sektor- und Titelkonzentration über alle Fonds hinweg sichtbar wird",
+  "Aktien-Screener mit Index-Universum und eigener Oberfläche",
+  "Anomalie-Erkennung für auffällige Kursbewegungen und Datenmuster im Depot",
+  "Verteilung nach Anlageklasse: Aktien, Fonds und ETFs, Zertifikate, Anleihen",
+  "Kapitalmaßnahmen: ISIN-Wechsel und Spin-offs werden zu einer Position zusammengeführt",
+  "Sichtbarer Kursstand und ein Hinweis, wenn Daten nach einem Neustart noch laden",
+  "Eine gemeinsame Rechenbasis für Benchmark-Differenz und Max Drawdown, bessere Instrumentsuche",
+  "Formulare mit deutscher Zahleneingabe, Feldfehlern und IBAN-Prüfung",
+  "Zusätzliche Absicherung zwischen den internen Diensten",
+];
+
+const ideas = [
+  "Lesezugang für Familie oder Berater",
+  "Eine bessere Zukunftssimulation",
+  "Historischer Devisenkurs zum Handelszeitpunkt",
+];
+---
+
+<section class="section" id="demnaechst">
+  <div class="container dn">
+    <div class="dn__intro">
+      <h2>Was als Nächstes drankommt</h2>
+      <p class="lead">
+        Direkt vom Ticket-Board übernommen. Termine stehen nicht dabei, weil
+        das hier ein privates Projekt ist und ich keine versprechen will.
+      </p>
+    </div>
+
+    <div class="pad" role="group" aria-label="Notizblock mit Erledigtem und Geplantem">
+      <span class="pad__holes" aria-hidden="true"></span>
+      <div class="pad__page">
+        <h3 class="pad__h hand">zuletzt erledigt</h3>
+        <ul class="todo" role="list">
+          {done.map((t) => <li class="todo__item todo__item--done"><span>{t}</span></li>)}
+        </ul>
+
+        <h3 class="pad__h hand">geplant</h3>
+        <ul class="todo" role="list">
+          {planned.map((t) => <li class="todo__item"><span>{t}</span></li>)}
+        </ul>
+
+        <aside class="pad__margin" aria-label="Ideen ohne festen Plan">
+          <p class="hand pad__margin-h">Ideen, noch ohne Plan:</p>
+          <ul role="list">
+            {ideas.map((t) => <li class="hand">{t}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dn {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 980px) {
+    .dn {
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .dn__intro {
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  .dn__intro h2 {
+    margin-bottom: 1.2rem;
+  }
+
+  .pad {
+    position: relative;
+    background: #fffef6;
+    box-shadow: 0 24px 40px -30px rgba(40, 30, 10, 0.55);
+    transform: rotate(0.6deg);
+  }
+
+  .pad__holes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 26px;
+    background:
+      radial-gradient(circle at 50% 55%, var(--paper) 6px, transparent 6.5px) 0 0 / 34px 26px repeat-x,
+      #e9e3cf;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .pad__page {
+    --line: 2rem;
+    padding: calc(26px + 1.2rem) 1.4rem 1.6rem 4.2rem;
+    background:
+      linear-gradient(90deg, transparent 3.2rem, rgba(194, 59, 34, 0.45) 3.2rem, rgba(194, 59, 34, 0.45) calc(3.2rem + 1.5px), transparent calc(3.2rem + 1.5px)),
+      repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--line) - 1px), rgba(35, 64, 142, 0.16) calc(var(--line) - 1px), rgba(35, 64, 142, 0.16) var(--line));
+    background-position: 0 0, 0 calc(26px + 0.6rem);
+    position: relative;
+    line-height: var(--line);
+  }
+
+  @media (min-width: 1100px) {
+    .pad__page {
+      padding-right: 15rem;
+    }
+  }
+
+  .pad__h {
+    font-size: 1.75rem;
+    line-height: var(--line);
+    margin: 0 0 0.25rem;
+    color: var(--blue);
+    font-variation-settings: normal;
+  }
+
+  .pad__h:not(:first-child) {
+    margin-top: var(--line);
+  }
+
+  .todo {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .todo__item {
+    position: relative;
+    padding-left: 1.9rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    padding-top: 0.28rem;
+    padding-bottom: 0.27rem;
+  }
+
+  .todo__item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid var(--ink-2);
+    border-radius: 2px;
+    transform: rotate(-3deg);
+  }
+
+  .todo__item--done {
+    color: var(--ink-dim);
+  }
+
+  .todo__item--done span {
+    text-decoration: line-through;
+    text-decoration-color: rgba(194, 59, 34, 0.7);
+    text-decoration-thickness: 1.5px;
+  }
+
+  .todo__item--done::after {
+    content: "✓";
+    position: absolute;
+    left: 1px;
+    top: -0.1rem;
+    font-family: var(--font-hand);
+    font-size: 1.6rem;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .pad__margin {
+    margin-top: var(--line);
+    transform: rotate(-2.5deg);
+  }
+
+  @media (min-width: 1100px) {
+    .pad__margin {
+      position: absolute;
+      right: 1.2rem;
+      top: 52%;
+      width: 12.5rem;
+      margin: 0;
+    }
+  }
+
+  .pad__margin-h {
+    font-size: 1.45rem;
+    color: var(--ink-2);
+  }
+
+  .pad__margin ul {
+    list-style: none;
+    margin: 0.3rem 0 0;
+    padding: 0;
+  }
+
+  .pad__margin li {
+    font-size: 1.35rem;
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 0.45rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .pad__margin li::before {
+    content: "~";
+    position: absolute;
+    left: 0;
+    color: var(--red);
+  }
+</style>

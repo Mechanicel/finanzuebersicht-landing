@@ -1,0 +1,220 @@
+---
+import Shot from "./Shot.astro";
+import { loop } from "../lib/pen";
+
+interface Chapter {
+  id: string;
+  question: string;
+  body: string[];
+  shot: {
+    src: string;
+    full: string;
+    alt: string;
+    width: number;
+    height: number;
+    marks?: string[];
+    note?: { text: string; x: number; y: number; rot?: number; width?: string };
+    caption: string;
+  };
+}
+
+const chapters: Chapter[] = [
+  {
+    id: "stand",
+    question: "Wie steht mein Depot gerade da?",
+    body: [
+      "Oben steht ein Satz zur Lage, darunter Marktwert, Einstand, Gewinn und der Anteil der größten Positionen. Die Prozentzahl dort ist der Gewinn gegen den Einstand, die zeitgewichtete Rendite kommt im Performance-Teil.",
+      "Das Board „Handlungsbedarf“ meldet, was auffällt: Positionen ohne Kurs, Datenlücken, hohe Konzentration oder Schwankung und einen großen Abstand zum Vergleichsindex.",
+    ],
+    shot: {
+      src: "/shots/detail-cockpit.webp",
+      full: "/shots/cockpit.webp",
+      alt: "Cockpit des Demo-Depots: „Dein Depot läuft stark mit +37,5 %“, Kacheln mit Marktwert, investiertem Wert, Gewinn, Top-Position und Top-3-Anteil, darunter das Board „Handlungsbedarf“ mit zwei Meldungen.",
+      width: 1636,
+      height: 990,
+      marks: [loop(182, 640, 155, 66, 3)],
+      caption: "Cockpit mit Handlungsbedarf",
+    },
+  },
+  {
+    id: "warum",
+    question: "Woher kommt die Rendite?",
+    body: [
+      "Die Attribution verteilt die Rendite eines Zeitraums auf Positionen, Sektoren, Länder und Währungen, jeweils in Prozentpunkten. Im Demo-Depot hat ASML im letzten Jahr mehr als doppelt so viel beigetragen wie der Welt-ETF, in den jeden Monat gespart wird.",
+      "Gerechnet wird mit den heutigen Beständen. Nachkäufe, Teilverkäufe, Gebühren und Steuern im Zeitraum fließen nicht ein, und das steht auch direkt im Panel.",
+    ],
+    shot: {
+      src: "/shots/detail-attribution.webp",
+      full: "/shots/attribution.webp",
+      alt: "Attribution im Demo-Depot über ein Jahr: „Dein Plus kommt vor allem von ASML HOLDING NV (+7,87 pp)“, ein Methodik-Hinweis und Beiträge nach Positionen, Sektoren, Ländern und Währungen.",
+      width: 1636,
+      height: 1098,
+      marks: [loop(430, 540, 398, 22, 11)],
+      caption: "Beiträge zur Rendite über ein Jahr",
+    },
+  },
+  {
+    id: "risiko",
+    question: "Wie stark schwankt das Ganze?",
+    body: [
+      "Die Rendite wird zeitgewichtet berechnet, damit Ein- und Auszahlungen das Ergebnis nicht verzerren. Den Vergleichsindex wählst du selbst: einen ETF oder eine Mischung aus bis zu fünf Bausteinen mit festen Gewichten.",
+      "Dazu kommen Volatilität, maximaler Drawdown, Sharpe und Sortino, gegenüber dem Index außerdem Beta, Korrelation, Tracking Error und Information Ratio.",
+    ],
+    shot: {
+      src: "/shots/detail-risk.webp",
+      full: "/shots/risk.webp",
+      alt: "Risiko-Panel des Demo-Depots über ein Jahr: Volatilität 13,55 %, Max Drawdown -8,16 %, Sharpe 1,56, Sortino 2,65, darunter Tracking Error, Information Ratio, Active Return, Beta und Korrelation gegenüber dem S&P-500-ETF.",
+      width: 1636,
+      height: 840,
+      marks: [loop(522, 482, 88, 36, 5)],
+      caption: "Risiko, absolut und gegenüber dem Index",
+    },
+  },
+  {
+    id: "dividende",
+    question: "Was kommt an Dividenden?",
+    body: [
+      "Die Prognose nimmt die Ausschüttungen jeder Position aus den letzten zwölf Monaten und verteilt sie auf die kommenden zwölf, brutto. Thesaurierende Fonds erkennt das Tool an ihrer Historie und rechnet ihnen nichts an.",
+      "Erhaltene Dividenden werden mit importiert, aber noch nicht eigens ausgewertet. Das Panel zeigt nur die Prognose.",
+    ],
+    shot: {
+      src: "/shots/detail-dividends.webp",
+      full: "/shots/dividends.webp",
+      alt: "Dividendenprognose des Demo-Depots, brutto: „Du erhältst voraussichtlich 587,26 € Dividende in den nächsten 12 Monaten“, Balken pro Monat mit Spitze im Mai und eine kumulierte Linie.",
+      width: 1636,
+      height: 792,
+      caption: "Dividendenprognose für zwölf Monate, brutto",
+    },
+  },
+  {
+    id: "zukunft",
+    question: "Wohin könnte das laufen?",
+    body: [
+      "Die Simulation spielt 10.000 mögliche Verläufe durch, kalibriert auf die bisherige Rendite und Schwankung deines Depots. Horizont und monatliche Sparrate stellst du ein.",
+      "Das Ergebnis ist eine Modellrechnung auf Basis der eigenen bisherigen Rendite und keine Prognose. Ist die Historie kurz oder ungewöhnlich stark, wie beim Demo-Depot mit drei guten Jahren, weist die App direkt über den Zahlen darauf hin.",
+    ],
+    shot: {
+      src: "/shots/detail-montecarlo.webp",
+      full: "/shots/montecarlo.webp",
+      alt: "Simulation des Demo-Depots über zehn Jahre mit dem Hinweis „Kurze Historie (3 Jahre): Die Simulation schreibt die bisherige Rendite fort“, darunter Median-Linie mit dunklem Band für die mittleren 50 Prozent und hellem Band für 90 Prozent der Verläufe.",
+      width: 1636,
+      height: 930,
+      caption: "Simulation über zehn Jahre, 10.000 Verläufe",
+    },
+  },
+  {
+    id: "einzelwert",
+    question: "Was steckt in einer einzelnen Aktie?",
+    body: [
+      "Jede Position hat eine eigene Seite mit Kursverlauf, Drawdown und dem Vergleich zum Index, bei Aktien mit Bewertung und Rentabilität, bei ETFs mit den größten Bestandteilen.",
+      "Unter „Finanzberichte“ stehen Bilanz, GuV und Cashflow der letzten bis zu vier Perioden, jährlich oder quartalsweise, mit Veränderung zur Vorperiode und kleinem Trend pro Zeile.",
+    ],
+    shot: {
+      src: "/shots/detail-statements.webp",
+      full: "/shots/statements.webp",
+      alt: "Finanzberichte der ASML Holding: Kennzahlen wie ROE, Verschuldungsgrad und Free Cashflow, darunter die Bilanz der Geschäftsjahre 2022 bis 2025.",
+      width: 1640,
+      height: 1000,
+      caption: "Instrumentseite, Finanzberichte (in der Vergrößerung mit Vorjahresvergleich)",
+    },
+  },
+];
+---
+
+<section class="section rundgang" id="rundgang">
+  <div class="container">
+    <header class="rundgang__head">
+      <h2>Sechs Fragen, die ich an mein Depot hatte</h2>
+      <p class="lead">
+        Zu jeder Frage gibt es in der App einen Bereich, der sie beantwortet.
+        Die Bilder zeigen ein Demo-Depot mit ausgedachten Käufen und Beträgen.
+        Ein Klick vergrößert das ganze Panel.
+      </p>
+    </header>
+
+    <ol class="chapters" role="list">
+      {
+        chapters.map((c, i) => (
+          <li class:list={["chapter", { "chapter--flip": i % 2 === 1 }]} id={c.id}>
+            <div class="chapter__text">
+              <span class="chapter__num">{i + 1}</span>
+              <h3>{c.question}</h3>
+              {c.body.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+            <div class="chapter__shot">
+              <Shot {...c.shot} />
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .rundgang__head {
+    max-width: 760px;
+    margin-bottom: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .rundgang__head h2 {
+    margin-bottom: 1.2rem;
+  }
+
+  .chapters {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .chapter {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 980px) {
+    .chapter {
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      gap: 4rem;
+    }
+
+    .chapter--flip {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    }
+
+    .chapter--flip .chapter__text {
+      order: 2;
+    }
+  }
+
+  .chapter__num {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+    border: 1.5px solid var(--red);
+    border-radius: 50%;
+    color: var(--red);
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+
+  .chapter__text h3 {
+    font-size: clamp(1.8rem, 2.2vw + 0.8rem, 2.5rem);
+    line-height: 1.08;
+    font-variation-settings: "opsz" 96, "SOFT" 40;
+    margin-bottom: 1.2rem;
+  }
+
+  .chapter__text p {
+    color: var(--ink-2);
+    margin-bottom: 0.9rem;
+    max-width: 52ch;
+  }
+</style>

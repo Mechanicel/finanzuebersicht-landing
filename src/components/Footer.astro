@@ -1,0 +1,64 @@
+---
+import Mail from "./Mail.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__note">
+      <p>
+        Finanzübersicht ist ein privates Projekt von Tom. Frontend in Vue,
+        Rechenkern in Python, die App läuft auf meinem eigenen Server. Fragen
+        und Kritik gern an <Mail />.
+      </p>
+    </div>
+    <nav class="footer__nav" aria-label="Rechtliches">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+      <span class="footer__year">© {year} Finanzübersicht</span>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1.5px solid var(--ink);
+    padding: 2.4rem 0 2.8rem;
+    background: var(--paper-2);
+    font-size: 0.92rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  @media (min-width: 820px) {
+    .footer__grid {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+  }
+
+  .footer__note {
+    max-width: 60ch;
+    color: var(--ink-2);
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+    align-items: baseline;
+  }
+
+  .footer__nav a {
+    color: var(--ink);
+  }
+
+  .footer__year {
+    font-size: 0.8rem;
+    color: var(--ink-mute);
+  }
+</style>

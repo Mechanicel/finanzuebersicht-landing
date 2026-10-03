@@ -1,0 +1,190 @@
+---
+import Shot from "./Shot.astro";
+import { loop } from "../lib/pen";
+
+const marks = [loop(612, 233, 82, 28, 7)];
+---
+
+<header class="mast">
+  <div class="container mast__row">
+    <a href="/" class="mast__brand" aria-label="Finanzübersicht, zur Startseite">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="29" height="29" rx="3" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M7 11h18M7 16h18M7 21h11" stroke="currentColor" stroke-width="1.6" opacity=".35" />
+        <path d="M7 22.5 L13 15.5 L17.5 19 L25.5 9.5" fill="none" stroke="#c23b22" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span>Finanzübersicht</span>
+    </a>
+    <nav class="mast__nav" aria-label="Seitennavigation">
+      <a href="#rundgang">Rundgang</a>
+      <a href="#daten">Deine Daten</a>
+      <a href="#beipackzettel">Beipackzettel</a>
+      <a href="#anmeldung" class="mast__cta">Warteliste</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="hero__status">Private Beta, gehostet von mir</p>
+      <h1>Eine Depot-Analyse, die dir auch sagt, wenn du hinter dem Markt liegst.</h1>
+      <p class="lead hero__lead">
+        Ich habe Finanzübersicht ursprünglich nur für mein eigenes Depot gebaut.
+        Es rechnet die Rendite zeitgewichtet, vergleicht sie mit einem Index
+        deiner Wahl und zeigt, welche Positionen wie viel dazu beigetragen
+        haben. Die Daten kommen aus deinem Trade-Republic-Export, eine
+        Verbindung zur Bank gibt es nicht.
+      </p>
+      <div class="hero__actions">
+        <a href="#anmeldung" class="btn btn--primary">Auf die Warteliste</a>
+        <a href="#rundgang" class="btn btn--ghost">Erst mal umsehen</a>
+      </div>
+    </div>
+
+    <div class="hero__exhibit">
+      <Shot
+        src="/shots/detail-verdict.webp"
+        full="/shots/verdict.webp"
+        alt="Ausschnitt aus dem Performance-Panel des Demo-Depots: „Du läufst hinter dem Markt mit -2,07 pp. Über 3 Monate hast du +2,40 % gemacht, der Vergleichsindex +4,47 %.“"
+        width={1160}
+        height={328}
+        marks={marks}
+        tilt={-1.2}
+        tape
+        eager
+        caption="Demo-Depot, Zeitraum drei Monate"
+      />
+      <p class="hero__remark hand">steht so ganz oben im Panel</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mast {
+    border-bottom: 1.5px solid var(--ink);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .mast__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 64px;
+  }
+
+  .mast__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    font-variation-settings: "opsz" 36, "SOFT" 50;
+  }
+
+  .mast__brand:hover {
+    color: var(--ink);
+  }
+
+  .mast__nav {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    font-size: 0.95rem;
+  }
+
+  .mast__nav a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .mast__nav a:hover {
+    color: var(--red);
+  }
+
+  .mast__nav .mast__cta {
+    padding: 0.4rem 0.85rem;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 760px) {
+    .mast__nav a:not(.mast__cta) {
+      display: none;
+    }
+  }
+
+  .hero {
+    padding: clamp(3rem, 7vw, 6rem) 0 clamp(3.5rem, 7vw, 6rem);
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1000px) {
+    .hero__grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .hero__status {
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 4.2vw + 0.6rem, 4.1rem);
+    line-height: 1.04;
+    margin-bottom: 1.6rem;
+  }
+
+  .hero__lead {
+    margin-bottom: 2rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .hero__exhibit {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  .hero__remark {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: clamp(1.5rem, 1.4vw + 1rem, 2.1rem);
+    transform: rotate(-3deg);
+  }
+
+  @media (max-width: 760px) {
+    .hero__exhibit {
+      padding-bottom: 0;
+    }
+
+    .hero__remark {
+      position: static;
+      margin-top: 0.6rem;
+      transform: none;
+    }
+  }
+</style>

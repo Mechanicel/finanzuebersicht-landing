@@ -1,0 +1,169 @@
+---
+const sections = [
+  {
+    h: "1. Was ist Finanzübersicht und wofür wird es angewendet?",
+    p: [
+      "Finanzübersicht ist ein privat entwickeltes Analyse-Tool für Wertpapierdepots. Es wird angewendet, wenn man wissen will, wie das eigene Depot gelaufen ist, warum, und wie viel Risiko darin steckt.",
+    ],
+  },
+  {
+    h: "2. Was sollten Sie vor der Anwendung beachten?",
+    p: [
+      "Finanzübersicht darf nicht angewendet werden, wenn Sie Echtzeitkurse, Kursalarme oder Kauf- und Verkaufssignale suchen. Das kann es nicht und soll es auch nicht.",
+      "Besondere Vorsicht ist geboten, wenn Ihr Depot nicht bei Trade Republic liegt. Der CSV-Import versteht derzeit nur dieses Format, alles andere geht per Handeingabe.",
+    ],
+  },
+  {
+    h: "3. Wie ist Finanzübersicht anzuwenden?",
+    p: [
+      "Im Browser: CSV hochladen, Vorschau prüfen, bestätigen, dann Zeitraum und Vergleichsindex wählen. Die Oberfläche ist deutsch, mit deutschen Zahlenformaten. Einige Fachbegriffe stehen noch auf Englisch (Holdings, P&L).",
+    ],
+  },
+  {
+    h: "4. Welche Nebenwirkungen sind möglich?",
+    p: [
+      "Gelegentlich: nüchterne Erkenntnisse über die eigene Bilanz als Stock-Picker.",
+      "Kurse werden zwischengespeichert, Verlaufscharts können deshalb einen Tag hinter dem aktuellen Kurs liegen. Die Simulation braucht mindestens 60 Handelstage Historie und schreibt die Vergangenheit fort.",
+    ],
+  },
+  {
+    h: "5. Wechselwirkungen",
+    p: [
+      "Mit Ihrer Bank: keine, es gibt keine Verbindung dorthin. Mit Ihrer Steuererklärung: ebenfalls keine. Dividenden werden brutto gezeigt, Steuern rechnet das Tool nicht.",
+    ],
+  },
+  {
+    h: "6. Was passiert bei fehlenden Daten?",
+    p: [
+      "Fehlende Werte bleiben fehlende Werte. Ohne Kurs gibt es keinen Marktwert, ohne bekannte Währung keine stille Umrechnung in Euro. Betroffene Positionen sind markiert.",
+    ],
+  },
+];
+---
+
+<section class="section bpz-wrap" id="beipackzettel">
+  <div class="container">
+    <article class="bpz" aria-labelledby="bpz-title">
+      <header class="bpz__head">
+        <p class="bpz__kicker">Gebrauchsinformation: Information für Anleger</p>
+        <h2 id="bpz-title">Beipackzettel</h2>
+        <p class="bpz__intro">
+          Lesen Sie die gesamte Packungsbeilage sorgfältig durch, bevor Sie
+          sich auf die Warteliste setzen. Sie enthält wichtige Informationen,
+          vor allem darüber, was das Tool <strong>nicht</strong> kann.
+        </p>
+      </header>
+      <div class="bpz__cols">
+        {
+          sections.map((s) => (
+            <section class="bpz__sec">
+              <h3>{s.h}</h3>
+              {s.p.map((t) => (
+                <p>{t}</p>
+              ))}
+            </section>
+          ))
+        }
+      </div>
+      <p class="bpz__foot mono">
+        Zu Risiken und Nebenwirkungen Ihrer Geldanlage lesen Sie die
+        Produktunterlagen und fragen Sie im Zweifel jemanden, der dafür
+        zugelassen ist. Finanzübersicht ist keine Anlageberatung.
+      </p>
+    </article>
+  </div>
+</section>
+
+<style>
+  .bpz-wrap {
+    background: var(--paper-2);
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .bpz {
+    max-width: 980px;
+    margin: 0 auto;
+    background: #fdfcf8;
+    padding: clamp(1.6rem, 4vw, 3rem);
+    box-shadow: 0 30px 50px -35px rgba(40, 30, 10, 0.5);
+    position: relative;
+    transform: rotate(-0.4deg);
+    /* Falzkanten wie bei einem echten Zettel */
+    background-image:
+      linear-gradient(90deg, transparent calc(50% - 1px), rgba(0, 0, 0, 0.045) 50%, transparent calc(50% + 1px)),
+      linear-gradient(180deg, transparent calc(33.3% - 1px), rgba(0, 0, 0, 0.04) 33.3%, transparent calc(33.3% + 1px)),
+      linear-gradient(180deg, transparent calc(66.6% - 1px), rgba(0, 0, 0, 0.04) 66.6%, transparent calc(66.6% + 1px));
+  }
+
+  .bpz__head {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .bpz__kicker {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+
+  .bpz h2 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw + 0.5rem, 2.6rem);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+  }
+
+  .bpz__intro {
+    font-size: 0.95rem;
+    max-width: 68ch;
+    border-left: 3px solid var(--ink);
+    padding-left: 0.9rem;
+  }
+
+  .bpz__cols {
+    columns: 1;
+    column-gap: 2.6rem;
+    column-rule: 1px solid var(--rule);
+  }
+
+  @media (min-width: 760px) {
+    .bpz__cols {
+      columns: 2;
+    }
+  }
+
+  .bpz__sec {
+    break-inside: avoid;
+    margin-bottom: 1.4rem;
+  }
+
+  .bpz__sec h3 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.98rem;
+    line-height: 1.35;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0;
+  }
+
+  .bpz__sec p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-bottom: 0.55rem;
+    hyphens: auto;
+  }
+
+  .bpz__foot {
+    margin-top: 0.6rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-strong);
+    font-size: 0.74rem;
+    color: var(--ink-dim);
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+export interface Props {
+  buttonLabel?: string;
+}
+
+const { buttonLabel = "Eintragen" } = Astro.props;
+
+const buttondownUser = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME;
+const formAction = `https://buttondown.com/api/emails/embed-subscribe/${buttondownUser}`;
+const popupUrl = `https://buttondown.com/${buttondownUser}`;
+const formId = "bd-form";
+---
+
+{
+  buttondownUser ? (
+    <form
+      action={formAction}
+      method="post"
+      target="popupwindow"
+      onsubmit={`window.open('${popupUrl}', 'popupwindow')`}
+      class="waitlist"
+      id={formId}
+    >
+      <label class="waitlist__label" for={`${formId}-email`}>
+        E-Mail-Adresse
+      </label>
+      <div class="waitlist__row">
+        <input
+          type="email"
+          name="email"
+          id={`${formId}-email`}
+          placeholder="name@beispiel.de"
+          required
+          autocomplete="email"
+          class="waitlist__input"
+        />
+        <button type="submit" class="btn btn--primary waitlist__btn">
+          {buttonLabel}
+        </button>
+      </div>
+      <p class="waitlist__note">
+        Du bekommst zuerst eine Mail zur Bestätigung (Double-Opt-In). Danach
+        schreibe ich nur, wenn ein Platz frei wird oder sich am Projekt etwas
+        Wichtiges tut. Abmelden geht mit einem Klick.
+      </p>
+    </form>
+  ) : (
+    <p class="waitlist__missing">
+      Das Anmeldeformular ist gerade nicht eingerichtet.
+    </p>
+  )
+}
+
+<style>
+  .waitlist {
+    width: 100%;
+    max-width: 540px;
+  }
+
+  .waitlist__label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .waitlist__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 540px) {
+    .waitlist__row {
+      flex-direction: row;
+      align-items: stretch;
+    }
+  }
+
+  .waitlist__input {
+    flex: 1;
+    min-width: 0;
+    min-height: 50px;
+    padding: 0 0.9rem;
+    background: #fff;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+  }
+
+  .waitlist__input::placeholder {
+    color: var(--ink-mute);
+  }
+
+  .waitlist__input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(35, 64, 142, 0.18);
+  }
+
+  .waitlist__btn {
+    white-space: nowrap;
+  }
+
+  .waitlist__note {
+    margin-top: 0.85rem;
+    font-size: 0.86rem;
+    color: var(--ink-dim);
+    max-width: 50ch;
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+const facts = [
+  {
+    q: "Wo liegen meine Depotdaten?",
+    a: "Auf einem Server, den ich selbst betreibe. Was du hochlädst, landet dort in einer Datenbank, zusammen mit deinem Konto.",
+  },
+  {
+    q: "Wer kann sie sehen?",
+    a: "Außer dir nur ich als Betreiber. Weitergegeben wird nichts.",
+  },
+  {
+    q: "Kann ich alles wieder löschen lassen?",
+    a: "Ja. Schreib mir, dann lösche ich dein Konto mitsamt allen Depotdaten.",
+  },
+  {
+    q: "Wird mitgeschnitten, was ich tue?",
+    a: "Es gibt kein Tracking und keine Analytics von Drittanbietern. Server-Logs bleiben auf meiner eigenen Infrastruktur.",
+  },
+  {
+    q: "Woher kommen die Kurse?",
+    a: "Kurse und Unternehmensdaten kommen von Yahoo Finance, ohne Gewähr und zwischengespeichert.",
+  },
+];
+---
+
+<section class="section daten" id="daten">
+  <div class="container daten__grid">
+    <div>
+      <h2>Deine Depotdaten liegen auf meinem Server</h2>
+      <p class="lead">
+        Finanzübersicht ist eine private Beta, die ich selbst hoste. Wer
+        mitmacht, lädt seine Depotdaten auf meinen Server hoch. Deshalb hier
+        die Antworten auf die Fragen, die ich an deiner Stelle zuerst stellen
+        würde.
+      </p>
+    </div>
+    <dl class="daten__list">
+      {
+        facts.map((f) => (
+          <div class="daten__item">
+            <dt>{f.q}</dt>
+            <dd>{f.a}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .daten {
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .daten__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 980px) {
+    .daten__grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 4.5rem;
+    }
+  }
+
+  .daten h2 {
+    margin-bottom: 1.2rem;
+  }
+
+  .daten__list {
+    margin: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .daten__item {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .daten__item dt {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .daten__item dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+</style>

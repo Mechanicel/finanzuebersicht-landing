@@ -1,0 +1,60 @@
+---
+import WaitlistForm from "./WaitlistForm.astro";
+---
+
+<section class="section anm" id="anmeldung">
+  <div class="container anm__grid">
+    <div class="anm__text">
+      <h2>Auf die Warteliste</h2>
+      <p class="lead">
+        Ich lasse neue Leute schrittweise rein. Der Server ist begrenzt, und
+        wer mir seine Depotdaten anvertraut, soll sich darauf verlassen können,
+        dass ich den Überblick behalte. Trag dich ein, dann schreibe ich dir,
+        sobald ein Platz frei ist, mit dem Link zur Registrierung und dem
+        Einladungscode.
+      </p>
+    </div>
+    <div class="anm__form">
+      <WaitlistForm buttonLabel="Eintragen" />
+      <p class="anm__aside">
+        Die Adresse liegt beim Newsletter-Dienst Buttondown und wird nur für
+        Nachrichten zur Beta und gelegentliche Updates zum Projekt benutzt.
+        Details stehen in der <a href="/datenschutz/">Datenschutzerklärung</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .anm {
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .anm__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 980px) {
+    .anm__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+    }
+  }
+
+  .anm__text h2 {
+    margin-bottom: 1.2rem;
+  }
+
+  .anm__form {
+    padding-top: 0.6rem;
+  }
+
+  .anm__aside {
+    margin-top: 1.2rem;
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+    max-width: 52ch;
+  }
+</style>

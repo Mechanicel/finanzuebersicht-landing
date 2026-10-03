@@ -1,0 +1,54 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+import Mail from "../components/Mail.astro";
+---
+
+<Base title="Impressum – Finanzübersicht">
+  <main class="container legal">
+    <a href="/" class="legal__back">← Zur Startseite</a>
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>
+      Tom Pinter<br />
+      Hopfengarten 28a<br />
+      65795 Hattersheim am Main<br />
+      Deutschland
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: <Mail />
+    </p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    max-width: 720px;
+  }
+
+  .legal h1 {
+    font-size: 2.4rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .legal h2 {
+    font-size: 1.25rem;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .legal p {
+    color: var(--ink-2);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__back {
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+  }
+</style>

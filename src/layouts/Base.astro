@@ -1,0 +1,111 @@
+---
+import "@fontsource-variable/fraunces/full.css";
+import "@fontsource-variable/fraunces/full-italic.css";
+import "@fontsource/instrument-sans/latin-400.css";
+import "@fontsource/instrument-sans/latin-500.css";
+import "@fontsource/instrument-sans/latin-600.css";
+import "@fontsource-variable/jetbrains-mono/index.css";
+import "@fontsource/caveat/latin-600.css";
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "Finanzübersicht – Depot-Analyse, private Beta",
+  description = "Private Beta einer Depot-Analyse auf Deutsch: zeitgewichtete Rendite, eigener Vergleichsindex, Risiko-Kennzahlen, Attribution, Dividendenprognose und Simulation. Import per Trade-Republic-CSV, ohne Verbindung zur Bank.",
+  noindex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3eee3" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Finanzübersicht" />
+    <meta property="og:image" content={new URL("/og.png", Astro.site)} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <slot />
+
+    <dialog class="lightbox" id="lightbox" aria-label="Vergrößerte Ansicht">
+      <form method="dialog" class="lightbox__bar">
+        <span class="lightbox__title"></span>
+        <button class="lightbox__close" aria-label="Schließen">Schließen ✕</button>
+      </form>
+      <div class="lightbox__body">
+        <img alt="" />
+      </div>
+    </dialog>
+
+    <script>
+      // Rotstift: Markierungen werden gezeichnet, sobald sie ins Bild scrollen.
+      const pens = document.querySelectorAll<SVGSVGElement>(".pen");
+      pens.forEach((svg) => {
+        svg.querySelectorAll<SVGPathElement>("path").forEach((p, i) => {
+          p.style.transitionDelay = `${i * 0.35}s`;
+        });
+      });
+
+      // Lightbox: Links mit data-lightbox öffnen das Bild im Dialog statt als Datei.
+      const dlg = document.getElementById("lightbox") as HTMLDialogElement | null;
+      if (dlg && typeof dlg.showModal === "function") {
+        const img = dlg.querySelector("img")!;
+        const title = dlg.querySelector(".lightbox__title")!;
+        document.querySelectorAll<HTMLAnchorElement>("a[data-lightbox]").forEach((a) => {
+          a.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            img.src = a.href;
+            img.alt = a.dataset.alt ?? "";
+            title.textContent = a.dataset.alt ?? "";
+            dlg.showModal();
+          });
+        });
+        dlg.addEventListener("click", (ev) => {
+          if (ev.target === dlg) dlg.close();
+        });
+      }
+
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-drawn");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { threshold: 0.45 },
+        );
+        pens.forEach((p) => io.observe(p));
+      } else {
+        pens.forEach((p) => p.classList.add("is-drawn"));
+      }
+    </script>
+  </body>
+</html>
