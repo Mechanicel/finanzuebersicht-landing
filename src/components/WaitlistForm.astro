@@ -5,7 +5,23 @@ export interface Props {
 
 const { buttonLabel = "Eintragen" } = Astro.props;
 
-const buttondownUser = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME;
+// Benutzername aus PUBLIC_BUTTONDOWN_USERNAME, sonst beim Build über die
+// Buttondown-API ermitteln. Der API-Key bleibt dabei auf dem Build-Server.
+let buttondownUser: string | undefined = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME;
+const apiKey = import.meta.env.BUTTONDOWN_API_KEY;
+if (!buttondownUser && apiKey) {
+  try {
+    const res = await fetch("https://api.buttondown.com/v1/newsletters", {
+      headers: { Authorization: `Token ${apiKey}` },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      buttondownUser = data?.results?.[0]?.username ?? undefined;
+    }
+  } catch {
+    // ohne Benutzernamen zeigt die Seite einen Hinweis statt des Formulars
+  }
+}
 const formAction = `https://buttondown.com/api/emails/embed-subscribe/${buttondownUser}`;
 const popupUrl = `https://buttondown.com/${buttondownUser}`;
 const formId = "bd-form";
