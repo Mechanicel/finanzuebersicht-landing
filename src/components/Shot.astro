@@ -1,16 +1,7 @@
 ---
 // Screenshot aus der App: Ausschnitt in Lesegröße, Klick öffnet das ganze Panel
 // in der Lightbox. Optional Rotstift-Markierungen (Koordinaten im Pixelraum des
-// Bildes) und eine handschriftliche Notiz.
-
-export interface Note {
-  text: string;
-  /** Position in Prozent der Bildbreite/-höhe; Werte außerhalb 0–100 liegen neben dem Bild */
-  x: number;
-  y: number;
-  rot?: number;
-  width?: string;
-}
+// Bildes).
 
 export interface Props {
   src: string;
@@ -20,7 +11,6 @@ export interface Props {
   /** Ganzes Panel für die Lightbox; ohne Angabe wird src vergrößert */
   full?: string;
   marks?: string[];
-  note?: Note;
   caption?: string;
   tilt?: number;
   tape?: boolean;
@@ -35,7 +25,6 @@ const {
   height,
   full,
   marks = [],
-  note,
   caption,
   tilt = 0,
   tape = false,
@@ -48,7 +37,7 @@ const {
   <div class="shot__frame">
     {tape && <span class="tape tape--l" aria-hidden="true" />}
     {tape && <span class="tape tape--r" aria-hidden="true" />}
-    <a href={full ?? src} class="shot__zoom" data-lightbox data-alt={alt}>
+    <a href={full ?? src} class="shot__zoom" data-lightbox data-alt={alt} data-title={caption ?? ""}>
       <img
         src={src}
         alt={alt}
@@ -71,17 +60,6 @@ const {
             <path d={d} pathLength="1" vector-effect="non-scaling-stroke" />
           ))}
         </svg>
-      )
-    }
-    {
-      note && (
-        <span
-          class="shot__note hand"
-          style={`left:${note.x}%;top:${note.y}%;--rot:${note.rot ?? -4}deg;${note.width ? `width:${note.width};` : ""}`}
-          aria-hidden="true"
-        >
-          {note.text}
-        </span>
       )
     }
   </div>
@@ -174,17 +152,6 @@ const {
     transform: rotate(5deg);
   }
 
-  .shot__note {
-    position: absolute;
-    z-index: 3;
-    font-size: clamp(1.25rem, 1.1vw + 0.9rem, 1.75rem);
-    transform: rotate(var(--rot));
-    width: max-content;
-    max-width: 16rem;
-    pointer-events: none;
-    text-shadow: 0 0 6px var(--paper), 0 0 2px var(--paper);
-  }
-
   .shot__cap {
     margin-top: 0.8rem;
     font-size: 0.86rem;
@@ -195,17 +162,6 @@ const {
   @media (max-width: 760px) {
     .shot {
       transform: none;
-    }
-
-    .shot__note {
-      position: static;
-      display: block;
-      margin: 6px -6px -6px;
-      padding-top: 0.7rem;
-      background: var(--paper);
-      transform: none;
-      max-width: none;
-      width: auto !important;
     }
   }
 </style>

@@ -7,11 +7,16 @@ import WaitlistForm from "./WaitlistForm.astro";
     <div class="anm__text">
       <h2>Auf die Warteliste</h2>
       <p class="lead">
-        Ich lasse neue Leute schrittweise rein. Der Server ist begrenzt, und
-        wer mir seine Depotdaten anvertraut, soll sich darauf verlassen können,
-        dass ich den Überblick behalte. Trag dich ein, dann schreibe ich dir,
-        sobald ein Platz frei ist, mit dem Link zur Registrierung und dem
+        Ich nehme neue Leute nach und nach dazu, damit ich Fehler beheben kann,
+        bevor sie viele treffen. Trag dich ein, dann schreibe ich dir, sobald
+        ein Platz frei ist, mit dem Link zur Registrierung und dem
         Einladungscode.
+      </p>
+      <p class="anm__cost">
+        In der Beta ist Finanzübersicht kostenlos. Ob es später etwas kostet,
+        ist offen; das kündige ich vorher an. Stelle ich das Projekt ein, sage
+        ich mindestens vier Wochen vorher Bescheid und lösche danach alle
+        Daten.
       </p>
     </div>
     <div class="anm__form">
@@ -45,6 +50,12 @@ import WaitlistForm from "./WaitlistForm.astro";
 
   .anm__text h2 {
     margin-bottom: 1.2rem;
+  }
+
+  .anm__cost {
+    margin-top: 1rem;
+    color: var(--ink-2);
+    max-width: 58ch;
   }
 
   .anm__form {

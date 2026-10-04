@@ -1,44 +1,33 @@
 ---
 import Shot from "./Shot.astro";
-
-const steps = [
-  {
-    title: "Exportieren",
-    text: "In der Trade-Republic-App die Transaktionen als CSV exportieren. Andere Broker liest der Import noch nicht, Depots von dort trägst du von Hand ein (per ISIN, WKN oder Kürzel).",
-  },
-  {
-    title: "Hochladen und prüfen",
-    text: "Die Vorschau zeigt, was neu ist, was schon drin ist und was sich nicht lesen ließ. Gespeichert wird erst, wenn du bestätigst. Doppelte Buchungen erkennt der Import an ihrer Transaktions-ID.",
-  },
-  {
-    title: "Rechnen lassen",
-    text: "Aus den Buchungen entstehen Bestände, Einstandskurse nach FIFO und der Cash-Bestand. Kurse und Unternehmensdaten holt das Tool von Yahoo Finance.",
-  },
-];
 ---
 
 <section class="section datenweg" id="datenweg">
   <div class="container datenweg__grid">
-    <div>
-      <h2>So kommt dein Depot ins Tool</h2>
-      <ol class="steps" role="list">
-        {
-          steps.map((s, i) => (
-            <li class="step">
-              <span class="step__n" aria-hidden="true">{i + 1}</span>
-              <div>
-                <h3>{s.title}</h3>
-                <p>{s.text}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-      <p class="datenweg__more">
-        Girokonto, Tagesgeld und Festgeld lassen sich zusätzlich als Konten
-        anlegen und Banken zuordnen. Pro Bank verwaltest du den
-        Freistellungsauftrag und siehst, wie viel vom Sparerpauschbetrag übrig
+    <div class="datenweg__text">
+      <h2>Wie kommt mein Depot ins Tool?</h2>
+      <p>
+        Über den CSV-Export von Trade Republic. Du lädst die Datei hoch und
+        siehst zuerst eine Vorschau mit neuen, schon vorhandenen und unlesbaren
+        Zeilen. Gespeichert wird erst, wenn du bestätigst. Lädst du dieselbe
+        Datei später noch einmal hoch, erkennt der Import jede Buchung an ihrer
+        Transaktions-ID wieder.
+      </p>
+      <p>
+        Aus den Buchungen berechnet das Tool Bestände, Einstandskurse nach FIFO
+        und den Cash-Bestand. Andere Broker liest der Import noch nicht. Depots
+        von dort trägst du von Hand ein, über eine Namenssuche. Exakte Ticker
+        und ISINs findet sie noch nicht zuverlässig, das steht auf der Liste
+        unten. Girokonto, Tagesgeld und Festgeld lassen sich als Konten
+        anlegen, und du kannst deine Freistellungsaufträge pro Bank eintragen.
+        Die App zeigt, wie viel vom Sparerpauschbetrag noch nicht verteilt
         ist.
+      </p>
+      <p>
+        Kurse und Unternehmensdaten kommen überwiegend von Yahoo Finance,
+        einzelne Bilanzdaten und die Wertpapiersuche von Financial Modeling
+        Prep. ISINs werden über OpenFIGI zugeordnet. Alles ohne Gewähr und
+        zwischengespeichert.
       </p>
     </div>
     <div class="datenweg__shot">
@@ -72,47 +61,12 @@ const steps = [
   }
 
   .datenweg h2 {
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.4rem;
   }
 
-  .steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .step {
-    display: grid;
-    grid-template-columns: 2.6rem 1fr;
-    gap: 1rem;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .step:first-child {
-    border-top: 1.5px solid var(--ink);
-  }
-
-  .step__n {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--red);
-    line-height: 1.2;
-  }
-
-  .step h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .step p {
+  .datenweg__text p {
     color: var(--ink-2);
-  }
-
-  .datenweg__more {
-    margin-top: 1.4rem;
-    color: var(--ink-dim);
+    margin-bottom: 1rem;
     max-width: 58ch;
   }
 

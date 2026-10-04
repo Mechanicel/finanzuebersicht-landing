@@ -9,14 +9,14 @@ const sections = [
   {
     h: "2. Was sollten Sie vor der Anwendung beachten?",
     p: [
-      "Finanzübersicht darf nicht angewendet werden, wenn Sie Echtzeitkurse, Kursalarme oder Kauf- und Verkaufssignale suchen. Das kann es nicht und soll es auch nicht.",
+      "Finanzübersicht darf nicht angewendet werden, wenn Sie Echtzeitkurse, Kursalarme oder Kauf- und Verkaufssignale suchen.",
       "Besondere Vorsicht ist geboten, wenn Ihr Depot nicht bei Trade Republic liegt. Der CSV-Import versteht derzeit nur dieses Format, alles andere geht per Handeingabe.",
     ],
   },
   {
     h: "3. Wie ist Finanzübersicht anzuwenden?",
     p: [
-      "Im Browser: CSV hochladen, Vorschau prüfen, bestätigen, dann Zeitraum und Vergleichsindex wählen. Die Oberfläche ist deutsch, mit deutschen Zahlenformaten. Einige Fachbegriffe stehen noch auf Englisch (Holdings, P&L).",
+      "Im Browser: CSV hochladen, Vorschau prüfen, bestätigen, dann Zeitraum und Vergleichsindex wählen. Die Oberfläche ist deutsch, mit deutschen Zahlenformaten. Viele Überschriften und Fachbegriffe stehen noch auf Englisch (z. B. Holdings, P&L, Snapshot, Tracking Error).",
     ],
   },
   {
@@ -35,7 +35,7 @@ const sections = [
   {
     h: "6. Was passiert bei fehlenden Daten?",
     p: [
-      "Fehlende Werte bleiben fehlende Werte. Ohne Kurs gibt es keinen Marktwert, ohne bekannte Währung keine stille Umrechnung in Euro. Betroffene Positionen sind markiert.",
+      "Ohne Kurs zeigt das Tool keinen Marktwert, und ohne bekannte Währung rechnet es nichts in Euro um. Betroffene Positionen sind markiert.",
     ],
   },
 ];
@@ -45,12 +45,12 @@ const sections = [
   <div class="container">
     <article class="bpz" aria-labelledby="bpz-title">
       <header class="bpz__head">
-        <p class="bpz__kicker">Gebrauchsinformation: Information für Anleger</p>
+        <p class="bpz__kicker">Gebrauchsinformation für Anleger</p>
         <h2 id="bpz-title">Beipackzettel</h2>
         <p class="bpz__intro">
           Lesen Sie die gesamte Packungsbeilage sorgfältig durch, bevor Sie
           sich auf die Warteliste setzen. Sie enthält wichtige Informationen,
-          vor allem darüber, was das Tool <strong>nicht</strong> kann.
+          vor allem darüber, was das Tool nicht kann.
         </p>
       </header>
       <div class="bpz__cols">
@@ -65,7 +65,7 @@ const sections = [
           ))
         }
       </div>
-      <p class="bpz__foot mono">
+      <p class="bpz__foot">
         Zu Risiken und Nebenwirkungen Ihrer Geldanlage lesen Sie die
         Produktunterlagen und fragen Sie im Zweifel jemanden, der dafür
         zugelassen ist. Finanzübersicht ist keine Anlageberatung.
@@ -105,8 +105,6 @@ const sections = [
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
     margin-bottom: 0.4rem;
   }
 

@@ -5,7 +5,6 @@ import "@fontsource/instrument-sans/latin-400.css";
 import "@fontsource/instrument-sans/latin-500.css";
 import "@fontsource/instrument-sans/latin-600.css";
 import "@fontsource-variable/jetbrains-mono/index.css";
-import "@fontsource/caveat/latin-600.css";
 import "../styles/global.css";
 
 export interface Props {
@@ -16,7 +15,7 @@ export interface Props {
 
 const {
   title = "Finanzübersicht – Depot-Analyse, private Beta",
-  description = "Private Beta einer Depot-Analyse auf Deutsch: zeitgewichtete Rendite, eigener Vergleichsindex, Risiko-Kennzahlen, Attribution, Dividendenprognose und Simulation. Import per Trade-Republic-CSV, ohne Verbindung zur Bank.",
+  description = "Finanzübersicht zeigt dir, wie dein Depot im Vergleich zu einem Index deiner Wahl läuft und welche Positionen wie viel dazu beigetragen haben. Private Beta, Import per Trade-Republic-CSV.",
   noindex = false,
 } = Astro.props;
 ---
@@ -44,6 +43,7 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/og.png", Astro.site)} />
 
     <script is:inline>
       document.documentElement.classList.add("js");
@@ -55,6 +55,7 @@ const {
     <dialog class="lightbox" id="lightbox" aria-label="Vergrößerte Ansicht">
       <form method="dialog" class="lightbox__bar">
         <span class="lightbox__title"></span>
+        <a class="lightbox__open" href="#" target="_blank" rel="noopener">Originalgröße</a>
         <button class="lightbox__close" aria-label="Schließen">Schließen ✕</button>
       </form>
       <div class="lightbox__body">
@@ -76,12 +77,14 @@ const {
       if (dlg && typeof dlg.showModal === "function") {
         const img = dlg.querySelector("img")!;
         const title = dlg.querySelector(".lightbox__title")!;
+        const open = dlg.querySelector<HTMLAnchorElement>(".lightbox__open")!;
         document.querySelectorAll<HTMLAnchorElement>("a[data-lightbox]").forEach((a) => {
           a.addEventListener("click", (ev) => {
             ev.preventDefault();
             img.src = a.href;
             img.alt = a.dataset.alt ?? "";
-            title.textContent = a.dataset.alt ?? "";
+            title.textContent = a.dataset.title || "Screenshot";
+            open.href = a.href;
             dlg.showModal();
           });
         });

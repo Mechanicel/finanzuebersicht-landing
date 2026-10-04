@@ -2,23 +2,23 @@
 const facts = [
   {
     q: "Wo liegen meine Depotdaten?",
-    a: "Auf einem Server, den ich selbst betreibe. Was du hochlädst, landet dort in einer Datenbank, zusammen mit deinem Konto.",
+    a: "Auf einem Server in Deutschland, den ich selbst betreibe. Datenbank, Sicherungen und Logs liegen auf dieser eigenen Infrastruktur.",
   },
   {
     q: "Wer kann sie sehen?",
-    a: "Außer dir nur ich als Betreiber. Weitergegeben wird nichts.",
+    a: "Außer dir nur ich als Betreiber. Deine Daten gebe ich an niemanden weiter. Für Kurse fragt der Server bei Yahoo Finance, Financial Modeling Prep und OpenFIGI nach den Wertpapierkennungen bzw. deinem Suchbegriff, ohne Angaben zu dir.",
+  },
+  {
+    q: "Wie sind die Daten geschützt?",
+    a: "Die Verbindung läuft über HTTPS, Passwörter speichere ich nur als bcrypt-Hash. Eine Zwei-Faktor-Anmeldung gibt es noch nicht.",
   },
   {
     q: "Kann ich alles wieder löschen lassen?",
-    a: "Ja. Schreib mir, dann lösche ich dein Konto mitsamt allen Depotdaten.",
+    a: "Ja. Löschen kannst du dein Konto jederzeit selbst im Profil, oder du schreibst mir. Dabei verschwinden das Konto und alle Depotdaten aus der Datenbank. Aus Server-Logs und Sicherungen verschwinden die Daten, wenn diese überschrieben werden.",
   },
   {
-    q: "Wird mitgeschnitten, was ich tue?",
-    a: "Es gibt kein Tracking und keine Analytics von Drittanbietern. Server-Logs bleiben auf meiner eigenen Infrastruktur.",
-  },
-  {
-    q: "Woher kommen die Kurse?",
-    a: "Kurse und Unternehmensdaten kommen von Yahoo Finance, ohne Gewähr und zwischengespeichert.",
+    q: "Wird protokolliert, was ich tue?",
+    a: "Der Server protokolliert jede Anfrage mit Zeitpunkt, aufgerufener Adresse samt Parametern, Antwortcode, IP-Adresse, Browserkennung und verweisender Seite, damit ich Fehler finden kann. Tracking oder Analytics von Drittanbietern gibt es nicht.",
   },
 ];
 ---
@@ -28,10 +28,10 @@ const facts = [
     <div>
       <h2>Deine Depotdaten liegen auf meinem Server</h2>
       <p class="lead">
-        Finanzübersicht ist eine private Beta, die ich selbst hoste. Wer
-        mitmacht, lädt seine Depotdaten auf meinen Server hoch. Deshalb hier
-        die Antworten auf die Fragen, die ich an deiner Stelle zuerst stellen
-        würde.
+        Finanzübersicht ist eine private Beta, die ich selbst betreibe. Wer
+        mitmacht, lädt seine Depotdaten zu mir hoch. Dazu gehören auch Name,
+        Konten mit IBAN und Freistellungsaufträge, die vollständige Liste steht
+        in der <a href="/datenschutz/">Datenschutzerklärung</a>.
       </p>
     </div>
     <dl class="daten__list">
@@ -48,10 +48,6 @@ const facts = [
 </section>
 
 <style>
-  .daten {
-    border-top: 1.5px solid var(--ink);
-  }
-
   .daten__grid {
     display: grid;
     gap: 2.5rem;
@@ -70,12 +66,15 @@ const facts = [
 
   .daten__list {
     margin: 0;
-    border-top: 1.5px solid var(--ink);
   }
 
   .daten__item {
     padding: 1.1rem 0;
     border-bottom: 1px solid var(--rule);
+  }
+
+  .daten__item:first-child {
+    padding-top: 0.2rem;
   }
 
   .daten__item dt {

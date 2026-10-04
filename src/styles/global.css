@@ -57,7 +57,6 @@
     "Segoe UI", Roboto, Arial, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo,
     Consolas, monospace;
-  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
 }
 
 *,
@@ -177,12 +176,6 @@ em {
   font-feature-settings: "zero" 1;
 }
 
-.hand {
-  font-family: var(--font-hand);
-  color: var(--red);
-  font-weight: 600;
-  line-height: 1.05;
-}
 
 .btn {
   display: inline-flex;
@@ -277,6 +270,7 @@ em {
   color: #e2e8f0;
   border-radius: 6px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .lightbox::backdrop {
@@ -294,10 +288,13 @@ em {
 }
 
 .lightbox__title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  flex: 1;
   color: #cbd5e1;
+}
+
+.lightbox__open {
+  flex: 0 0 auto;
+  color: #93c5fd;
 }
 
 .lightbox__close {
@@ -320,6 +317,27 @@ em {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Auf schmalen Bildschirmen das Bild in Originalbreite zeigen und scrollen lassen */
+@media (max-width: 760px) {
+  .lightbox {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .lightbox__body {
+    max-height: calc(100vh - 56px);
+  }
+
+  .lightbox__body img {
+    width: min(900px, 200vw);
+    max-width: none;
+    height: auto;
+  }
 }
 
 /* Rotstift-Kringel, die beim Scrollen gezeichnet werden */

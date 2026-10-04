@@ -5,8 +5,6 @@ const user = "tom";
 const domain = "pinterhome.de";
 ---
 
-<a class="mail" data-u={user} data-d={domain}>{user} [at] {domain}</a>
-
 <script>
   document.querySelectorAll<HTMLAnchorElement>("a.mail[data-u]").forEach((a) => {
     const addr = `${a.dataset.u}@${a.dataset.d}`;
@@ -14,3 +12,5 @@ const domain = "pinterhome.de";
     a.textContent = addr;
   });
 </script>
+
+<a class="mail" data-u={user} data-d={domain}>{user} [at] {domain}</a>

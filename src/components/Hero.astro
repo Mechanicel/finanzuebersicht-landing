@@ -1,8 +1,8 @@
 ---
 import Shot from "./Shot.astro";
-import { loop } from "../lib/pen";
+import { underline } from "../lib/pen";
 
-const marks = [loop(612, 233, 82, 28, 7)];
+const marks = [underline(552, 680, 254, 7)];
 ---
 
 <header class="mast">
@@ -31,10 +31,10 @@ const marks = [loop(612, 233, 82, 28, 7)];
       <h1>Eine Depot-Analyse, die dir auch sagt, wenn du hinter dem Markt liegst.</h1>
       <p class="lead hero__lead">
         Ich habe Finanzübersicht ursprünglich nur für mein eigenes Depot gebaut.
-        Es rechnet die Rendite zeitgewichtet, vergleicht sie mit einem Index
-        deiner Wahl und zeigt, welche Positionen wie viel dazu beigetragen
-        haben. Die Daten kommen aus deinem Trade-Republic-Export, eine
-        Verbindung zur Bank gibt es nicht.
+        Es vergleicht die zeitgewichtete Rendite mit einem Index deiner Wahl
+        und zeigt, welche Positionen wie viel dazu beigetragen haben. Die Daten
+        kommen aus deinem Trade-Republic-Export, eine Verbindung zur Bank gibt
+        es nicht.
       </p>
       <div class="hero__actions">
         <a href="#anmeldung" class="btn btn--primary">Auf die Warteliste</a>
@@ -46,7 +46,7 @@ const marks = [loop(612, 233, 82, 28, 7)];
       <Shot
         src="/shots/detail-verdict.webp"
         full="/shots/verdict.webp"
-        alt="Ausschnitt aus dem Performance-Panel des Demo-Depots: „Du läufst hinter dem Markt mit -2,07 pp. Über 3 Monate hast du +2,40 % gemacht, der Vergleichsindex +4,47 %.“"
+        alt="Ausschnitt aus dem Panel „Wertentwicklung“ des Demo-Depots: „Du läufst hinter dem Markt mit -2,07 pp. Über 3 Monate hast du +2,40 % gemacht, der Vergleichsindex +4,47 %.“"
         width={1160}
         height={328}
         marks={marks}
@@ -55,7 +55,6 @@ const marks = [loop(612, 233, 82, 28, 7)];
         eager
         caption="Demo-Depot, Zeitraum drei Monate"
       />
-      <p class="hero__remark hand">steht so ganz oben im Panel</p>
     </div>
   </div>
 </section>
@@ -168,23 +167,10 @@ const marks = [loop(612, 233, 82, 28, 7)];
     padding-bottom: 3rem;
   }
 
-  .hero__remark {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: clamp(1.5rem, 1.4vw + 1rem, 2.1rem);
-    transform: rotate(-3deg);
-  }
 
   @media (max-width: 760px) {
     .hero__exhibit {
       padding-bottom: 0;
-    }
-
-    .hero__remark {
-      position: static;
-      margin-top: 0.6rem;
-      transform: none;
     }
   }
 </style>

@@ -18,37 +18,30 @@ npm run build      # → dist/
 npm run preview    # statisches Preview von dist/
 ```
 
-## E-Mail-Sammlung (Buttondown)
+## Warteliste (Buttondown)
 
-Das Warteliste-Formular nutzt das Buttondown-Embed.
+Das Formular nutzt das Buttondown-Embed. Den Benutzernamen ermittelt der Build
+auf zwei Wegen:
 
-1. Kostenlosen Account anlegen: <https://buttondown.com/>
-2. Username notieren (z. B. `finanzuebersicht`).
-3. `.env` aus Vorlage erzeugen und Username eintragen:
+1. `PUBLIC_BUTTONDOWN_USERNAME` ist gesetzt (lokal in `.env`, siehe `.env.example`), oder
+2. `BUTTONDOWN_API_KEY` ist gesetzt (auf Vercel als Secret). Dann fragt der Build
+   den Benutzernamen über die Buttondown-API ab. Der Key landet nicht im HTML.
 
-   ```bash
-   cp .env.example .env
-   # PUBLIC_BUTTONDOWN_USERNAME=finanzuebersicht
-   ```
-
-4. Bei Vercel / Netlify die Env-Variable `PUBLIC_BUTTONDOWN_USERNAME`
-   im Dashboard setzen.
-
-Double-Opt-In ist bei Buttondown standardmäßig aktiv.
+Ohne beides zeigt die Seite einen Hinweis statt des Formulars.
 
 ## Deployment
 
 ### Vercel
 
 1. Repo bei Vercel importieren (Framework: **Astro** wird automatisch erkannt).
-2. Env-Variable `PUBLIC_BUTTONDOWN_USERNAME` setzen.
+2. Env-Variable `BUTTONDOWN_API_KEY` setzen.
 3. Domain verbinden.
 
 ### Netlify
 
 1. Repo bei Netlify verbinden.
 2. Build command: `npm run build`, Publish directory: `dist`.
-3. Env-Variable `PUBLIC_BUTTONDOWN_USERNAME` setzen.
+3. Env-Variable `BUTTONDOWN_API_KEY` setzen.
 
 ### Cloudflare Pages
 
@@ -62,8 +55,8 @@ Double-Opt-In ist bei Buttondown standardmäßig aktiv.
 | --- | --- |
 | Kopfzeile, Hero | `src/components/Hero.astro` |
 | Rundgang (6 Fragen mit Screenshot) | `src/components/Rundgang.astro` |
-| Weitere Ansichten | `src/components/Ansichten.astro` |
-| CSV-Import | `src/components/Datenweg.astro` |
+| CSV-Import und Datenquellen | `src/components/Datenweg.astro` |
+| Vergleich mit Portfolio Performance | `src/components/Vergleich.astro` |
 | Was mit den Depotdaten passiert | `src/components/Daten.astro` |
 | Beipackzettel (Grenzen des Tools) | `src/components/Beipackzettel.astro` |
 | Roadmap-Notizblock | `src/components/Demnaechst.astro` |
@@ -72,8 +65,9 @@ Double-Opt-In ist bei Buttondown standardmäßig aktiv.
 | Farben & Typo | `src/styles/global.css` (CSS-Variablen oben) |
 
 
-Schriften (Fraunces, Instrument Sans, JetBrains Mono, Caveat) kommen über
-`@fontsource` aus `node_modules` und werden mit der Seite ausgeliefert.
+Schriften (Fraunces, Instrument Sans, JetBrains Mono) kommen über
+`@fontsource` aus `node_modules` und werden von der Seite selbst ausgeliefert,
+nicht von Google Fonts.
 
 ## Screenshots
 
@@ -82,13 +76,13 @@ Ausschnitte für die Seite, die übrigen sind ganze Panels für die Lightbox.
 Alle stammen aus einem lokalen Demo-Stack mit einem synthetischen Depot.
 Echte Depotdaten dürfen hier nie auftauchen, auch nicht verfremdet.
 
-Rotstift-Markierungen setzen `Rundgang.astro` und `Hero.astro` mit den Helfern
-aus `src/lib/pen.ts`. Die Koordinaten beziehen sich auf die Pixelmaße des
-jeweiligen Bildes.
+Die einzige Rotstift-Markierung (Unterstreichung im Hero) setzt `Hero.astro` mit
+den Helfern aus `src/lib/pen.ts`. Die Koordinaten beziehen sich auf die
+Pixelmaße des Bildes.
 
 ## Stack
 
 - [Astro 4](https://astro.build/) — statisch generiert
 - Vanilla CSS mit CSS-Variablen (keine Tailwind/UI-Lib-Dependency)
-- Buttondown Embed für die Warteliste
-- Inter Fallback auf System-Stack (kein Webfont-Download)
+- Buttondown-Embed für die Warteliste
+- Webfonts über @fontsource, selbst ausgeliefert (kein Google Fonts)
